@@ -20,6 +20,7 @@ from email.message import EmailMessage
 
 import requests
 
+print("Start reading pollen info from DWD")
 # set to true if emails shall be sent out
 SEND_EMAIL = True
 
@@ -136,6 +137,7 @@ def load_description(desc):
             return "N/A"
 
 
+print("Creating html output")
 message_text = ""
 # read out values for a specific region and add lines to html output
 for region in data["content"]:
@@ -160,7 +162,9 @@ msg_text += """
   </body>
 </html>
 """
+
 # send an email
+print("Sending email")
 if SEND_EMAIL:
     msg = EmailMessage()
     msg.add_header('Content-Type', 'text/html')
@@ -174,3 +178,5 @@ if SEND_EMAIL:
         connection.starttls(context=context)
         connection.login(user=email_sender, password=email_password)
         connection.send_message(msg)
+
+print("Finished")
