@@ -9,11 +9,13 @@ email sender-address, sender-password and recipient must be provided as environm
 The program was created as proof-of-concept and is not optimized.
 2024, M.Renken
 """
+# pylint: disable=C0103
 
 import datetime as dt
 import os
 import smtplib
 import ssl
+import sys
 from email.message import EmailMessage
 
 import requests
@@ -40,12 +42,11 @@ try:
     email_receipient = os.environ["PollenEmailRecipient"]
 except KeyError as error_message:
     print(
-        "Configuration environment variables not found. Please set environment variables \n- PollenEmailSender \n"
+        "Configuration environment variables not found. Please set "
+        "environment variables \n- PollenEmailSender \n"
         "- PollenEmailSenderPassword \n- PollenEmailRecipient")
     print("\n Missing: ", error_message)
-    exit(1)
-
-message_text = ""
+    sys.exit(1)
 
 # read pollen info from DWD page
 response = requests.get(url=DWD_URL)
@@ -131,8 +132,11 @@ def load_description(desc):
     for id_value, id_description in legend.items():
         if id_description == desc:
             return legend.get(id_value + "_desc")
+        else:
+            return "N/A"
 
 
+message_text = ""
 # read out values for a specific region and add lines to html output
 for region in data["content"]:
     if (region["region_id"] == 30) and (region["partregion_id"] == 32):
