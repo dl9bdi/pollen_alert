@@ -80,27 +80,27 @@ msg_text = """
     }
 
     .gruen {
-      background-color: green;
+      background-color: #00FF00;
     }
     
     .gruengruengelb {
-      background-color: yellowgreen;
+      background-color: #33CC00;
     }    
 
     .gruengelb {
-      background-color: Gold;
+      background-color: #4DB300;
     }    
 
     .gelb {
-      background-color: yellow;
+      background-color: #808000;
     }
 
     .gelbgelbrot {
-      background-color: Orange;
+      background-color: #CC3300;
     }
 
     .gelbrot {
-      background-color: OrangeRed;
+      background-color: #FF0000;
     }
 
 
