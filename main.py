@@ -25,7 +25,7 @@ print("Start reading pollen info from DWD")
 SEND_EMAIL = True
 
 DWD_URL = 'https://opendata.dwd.de/climate_environment/health/alerts/s31fg.json'
-day_matching = {"dayafter_to": "gestern", "today": "heute", "tomorrow": "morgen"}
+day_matching = {"dayafter_to": "übermorgen", "today": "heute", "tomorrow": "morgen"}
 
 color_assignment = {
     "0": "<div class='kreis gruen'></div>",
@@ -117,9 +117,9 @@ msg_text += """
     <table>
         <tr>
             <td></td>
-            <td width=60 align=center>Gestern</td>
             <td width=60 align=center>Heute</td>
             <td width=60 align=center>Morgen</td>
+            <td width=60 align=center>Übermorgen</td>
         </tr>
 """
 
@@ -145,7 +145,7 @@ for region in data["content"]:
         all_pollen = region["Pollen"]
         output_line = ""
         for pollen, loads in all_pollen.items():
-            sort_days = sorted(loads)
+            sort_days = reversed(sorted(loads))
             message_text += pollen + ": "
             output_line = f"        <tr><td>{pollen}</td> "
             for day in sort_days:
